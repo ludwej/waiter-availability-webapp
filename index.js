@@ -53,7 +53,29 @@ app.use(flash())
 
 
 
-app.get("/");
+app.get('/', function (req, res) {
+
+
+  res.render('home');
+});
+
+app.get('/waiters/:username', function (req, res) {
+
+
+  res.render('home');
+});
+
+app.post('/waiters/:username', function (req, res) {
+
+
+  res.render('home');
+});
+
+
+app.get('/days', function (req, res) {
+  res.render('home');
+});
+
 
 
 let PORT = process.env.PORT || 3020;
