@@ -1,4 +1,4 @@
-DROP table if EXISTS waiters, weekdays,shift CASCADE;
+DROP table if EXISTS waiters, weekdays,shift;
 
 create table waiters(
 	id serial not null primary key,
@@ -18,11 +18,11 @@ create table shift(
 	foreign key (waiter_id) REFERENCES waiters(id)
 );
 
-insert into weekdays (day) values ('Monday');
-insert into weekdays (day) values ('Tuesday');
-insert into weekdays (day) values ('Wednesday');
-insert into weekdays (day) values ('Thursday');
-insert into weekdays (day) values ('Friday');
-insert into weekdays (day) values ('Saturday');
-insert into weekdays (day) values ('Sunday');
+insert into weekdays (day) values ('Mon');
+insert into weekdays (day) values ('Tue');
+insert into weekdays (day) values ('Wed');
+insert into weekdays (day) values ('Thu');
+insert into weekdays (day) values ('Fri');
+insert into weekdays (day) values ('Sat');
+insert into weekdays (day) values ('Sun');
 
