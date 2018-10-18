@@ -2,7 +2,7 @@ let express = require('express')
 let app = express()
 let flash = require('express-flash')
 const session = require('express-session')
-let registrationFunction= require('./Registration.js')
+let waiters= require('./waiter-app.js')
 
 
 
@@ -15,18 +15,18 @@ if (process.env.DATABASE_URL && !local) {
   useSSL = true
 }
 // which db connection to use
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex-admin:code321@localhost:5432/waiter_availability'
 
 
-// const pool = new Pool({
-//   connectionString,
-//   ssl: useSSL
-// })
+const pool = new Pool({
+  connectionString,
+  ssl: useSSL
+})
 
 
-// let routing = routes(pool)
 
 
-// app.use(flash())
+app.use(flash())
 
 var exphbs = require('express-handlebars')
 var bodyParser = require('body-parser')
@@ -73,6 +73,8 @@ app.post('/waiters/:username', function (req, res) {
 
 
 app.get('/days', function (req, res) {
+  
+
   res.render('home');
 });
 
