@@ -2,9 +2,6 @@ let express = require('express')
 let app = express()
 let flash = require('express-flash')
 const session = require('express-session')
-let waiters= require('./waiter-app.js')
-
-
 
 const pg = require('pg')
 const Pool = pg.Pool
@@ -23,8 +20,8 @@ const pool = new Pool({
   ssl: useSSL
 })
 
-
-
+let waitersF= require('./waiter-app.js')
+let waitersInst= waitersF(pool)
 
 app.use(flash())
 
@@ -51,8 +48,6 @@ app.use(session({
 
 app.use(flash())
 
-
-
 app.get('/', function (req, res) {
 
 
@@ -60,15 +55,17 @@ app.get('/', function (req, res) {
 });
 
 app.get('/waiters/:username', function (req, res) {
-
+     req.params.username
 
   res.render('home');
 });
 
-app.post('/waiters/:username', function (req, res) {
-
-
-  res.render('home');
+app.post('/waiters/:username', async function (req, res) {
+  let name = req.body.waiter;
+  let inserWaiter = await waitersInst.enterWaiter(name)
+  res.render('home', {
+    inserWaiter
+  });
 });
 
 

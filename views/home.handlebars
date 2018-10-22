@@ -2,6 +2,12 @@
 
     <h1> WAITERS AVAILABLE </h1>
 
+  <form action="/waiters/:username" method="POST">
+    <input type="text" name="waiter">
+
+    <button class="button-primary GreetBtn" type="submit" name="button">Greet</button>
+
+  </form>
 
 <form action="/days">
   <input type="checkbox" name="day" value="Mon"> Monday<br>
@@ -9,7 +15,7 @@
   <input type="checkbox" name="day" value="Wed"> Wed<br>
   <input type="checkbox" name="day" value="Thu"> Thursday<br>
   <input type="checkbox" name="day" value="Fri"> Friday<br>
-  <input type="submit" value="Submit">
+  
 </form>
 
 
