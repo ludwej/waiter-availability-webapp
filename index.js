@@ -55,24 +55,37 @@ app.get('/', function (req, res) {
 });
 
 app.get('/waiters/:username', function (req, res) {
-     req.params.username
+   let waiter =  req.params.username
 
-  res.render('home');
+  res.render('home',{
+    waiter
+  }
+);
 });
 
-app.post('/waiters/:username', async function (req, res) {
+app.post('/waiters/:inserWaiter', async function (req, res) {
   let name = req.body.waiter;
+  let day = req.body.day ;
   let inserWaiter = await waitersInst.enterWaiter(name)
+  let getDay = await waitersInst.getShift(day)
+  console.log(getDay);
+  
   res.render('home', {
-    inserWaiter
+    inserWaiter,
+    getDay
   });
 });
 
 
-app.get('/days', function (req, res) {
+app.get('/days', async function (req, res) {
+  let days = req.body.day
+  let getDay = await waitersInst.getShift(days)  
+  console.log(getDay);
   
 
-  res.render('home');
+  res.render('home', {
+    getDay
+  });
 });
 
 
