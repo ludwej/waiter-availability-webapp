@@ -12,8 +12,8 @@ create table weekdays(
 
 create table shift(
 	id serial not null primary key,
-	day_id int not null,
-	waiter_id int not null,
+	day_id int,
+	waiter_id int,
 	foreign key (day_id) REFERENCES weekdays(id),
 	foreign key (waiter_id) REFERENCES waiters(id)
 );

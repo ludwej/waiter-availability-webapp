@@ -64,10 +64,10 @@ app.get('/waiters/:username', function (req, res) {
 });
 
 app.post('/waiters/:inserWaiter', async function (req, res) {
-  let name = req.body.waiter;
+  let name = req.params.waiter;
   let day = req.body.day ;
   let inserWaiter = await waitersInst.enterWaiter(name)
-  let getDay = await waitersInst.getShift(day)
+  let getDay = await waitersInst.getShift(name, day)
   console.log(getDay);
   
   res.render('home', {
