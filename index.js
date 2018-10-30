@@ -78,6 +78,7 @@ app.post('/waiters/:inserWaiter', async function (req, res) {
 
 
 app.get('/days', async function (req, res) {
+  
   let days = req.body.day
   let getDay = await waitersInst.getShift(days)  
   console.log(getDay);

@@ -16,8 +16,16 @@ module.exports = function(pool) {
 
     async function getShift(){
       let waiter = await pool.query('SELECT id FROM waiters');
-      let day = await pool.query('select day from weekdays where day_id = $1 ', [waiter])    
-      return day.rows
+       let waiterId = await pool.query('INSERT into shift (waiter_id)  values($1)', [waiter.rows[0].id]);
+       console.log(waiterId);
+       
+      
+      
+    //   let day = await pool.query('SELECT id FROM weekdays')
+    //   console.log(day.rows);
+      
+         
+    //   return day.rows
 
     }
 

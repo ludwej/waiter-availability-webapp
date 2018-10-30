@@ -28,6 +28,27 @@
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+body{
+  text-align: center;
+}
+
+
+.days{
+  display: inline-block;
+}
+
+h1{
+  text-align: center ;
+  background-color: aquamarine;
+  
+} 
+.days{
+  display: inline;
+}
+
+
+
 .container {
   position: relative;
   width: 100%;
