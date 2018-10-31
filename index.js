@@ -48,33 +48,43 @@ app.use(session({
 
 app.use(flash())
 
-app.get('/', function (req, res) {
+  // app.get('/', async function (req, res) {
 
 
-  res.render('home');
+  //   res.render('home');
+  // });
+
+app.post('/waiters/:username', async function (req, res) {
+
+  let name = req.params.username;
+  console.log(name);
+
+  // let day = req.body.day ;
+  // // console.log(day);
+  let inserWaiter = await waitersInst.enterWaiter(name)
+  console.log(inserWaiter );
+  
+  
+  // let getDay = await waitersInst.getShift(name, day)
+  
+  res.render('home', {
+    name
+    //inserWaiter
+    // getDay
+  });
 });
 
-app.get('/waiters/:username', function (req, res) {
+app.get('/waiters/:username', async function (req, res) {
    let waiter =  req.params.username
-
+  let inserWaiter = await waitersInst.enterWaiter(waiter)
+  
   res.render('home',{
     waiter
   }
 );
 });
 
-app.post('/waiters/:inserWaiter', async function (req, res) {
-  let name = req.params.waiter;
-  let day = req.body.day ;
-  let inserWaiter = await waitersInst.enterWaiter(name)
-  let getDay = await waitersInst.getShift(name, day)
-  console.log(getDay);
-  
-  res.render('home', {
-    inserWaiter,
-    getDay
-  });
-});
+
 
 
 app.get('/days', async function (req, res) {
