@@ -53,44 +53,42 @@ app.use(flash())
 
   //   res.render('home');
   // });
+  app.get('/waiters/:username', async function (req, res) {
+    let waiter =  req.params.username
+   let inserWaiter = await waitersInst.enterWaiter(waiter)
+  
+   
+   res.render('home',{
+     inserWaiter,
+     waiter
+   }
+ );
+ });
+
+
 
 app.post('/waiters/:username', async function (req, res) {
-
   let name = req.params.username;
-  console.log(name);
-
-  // let day = req.body.day ;
-  // // console.log(day);
-  let inserWaiter = await waitersInst.enterWaiter(name)
-  console.log(inserWaiter );
-  
-  
-  // let getDay = await waitersInst.getShift(name, day)
+  let days = req.body.day
+  let inserWaiter = await waitersInst.enterWaiter(name)  
+  let getDay = await waitersInst.getShift(name, days)
   
   res.render('home', {
-    name
-    //inserWaiter
-    // getDay
+    name,
+    inserWaiter,
+    getDay
   });
 });
 
-app.get('/waiters/:username', async function (req, res) {
-   let waiter =  req.params.username
-  let inserWaiter = await waitersInst.enterWaiter(waiter)
-  
-  res.render('home',{
-    waiter
-  }
-);
-});
+
 
 
 
 
 app.get('/days', async function (req, res) {
   
-  let days = req.body.day
-  let getDay = await waitersInst.getShift(days)  
+  
+   
   console.log(getDay);
   
 
