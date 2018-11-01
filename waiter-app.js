@@ -24,7 +24,14 @@ module.exports = function (pool) {
       let dayId = dayIdResults.rows[0].id;
       await pool.query('INSERT INTO shift (day_id, waiter_id) values($1, $2)', [dayId, idWaiter]);
     }
+
+    let joinTables = await pool.query('SELECT waiters.waiter, weekdays.day FROM waiters INNER JOIN shift ON waiters.id = shift.waiter_id INNER JOIN weekdays ON shift.day_id = weekdays.id')
+      console.log(joinTables.rows);
+        return joinTables.rows
   }
+//   SELECT character.name, actor.name FROM character INNER JOIN
+// character_actor ON character.id = character_actor.character_id INNER JOIN
+// actor ON character_actor.actor_id=actor.id;
 
   return {
     enterWaiter,
