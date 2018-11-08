@@ -1,12 +1,8 @@
 let express = require('express')
 let assert = require('assert')
-
-
-
 //Connection
 const pg = require('pg')
 const Pool = pg.Pool
-
 let useSSL = false
 let local = process.env.LOCAL || false
 if (process.env.DATABASE_URL && !local) {
@@ -14,8 +10,6 @@ if (process.env.DATABASE_URL && !local) {
 }
 // which db connection to use
 const connectionString = process.env.DATABASE_URL || 'postgresql://codex-admin:code321@localhost:5432/waiter_availability'
-
-
 const pool = new Pool({
   connectionString,
   ssl: useSSL

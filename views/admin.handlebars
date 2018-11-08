@@ -1,0 +1,19 @@
+<h1>Admin</h1>
+
+<form action="/days" method="get">
+      <button class="button-primary" type="submit" name="button">Home</button> </form>
+
+
+     <table>
+            {{#each days}}
+        
+            <th> {{ this }} </th> 
+        
+        {{/each}}
+</table>
+        
+    </table>
+    <form action="/resetDB" method="POST">
+      <button class="button-primary" type="submit" name="button">Reset</button> </form>
+
+</div>

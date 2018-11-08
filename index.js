@@ -55,8 +55,8 @@ app.use(flash())
   // });
   app.get('/waiters/:username', async function (req, res) {
     let waiter =  req.params.username
-   let inserWaiter = await waitersInst.enterWaiter(waiter)
-  
+    let inserWaiter = await waitersInst.enterWaiter(waiter)
+    let days = await waitersInst.getDay()
    
    res.render('home',{
      inserWaiter,
@@ -72,6 +72,9 @@ app.post('/waiters/:username', async function (req, res) {
   let days = req.body.day
   let inserWaiter = await waitersInst.enterWaiter(name)  
   let getDay = await waitersInst.getShift(name, days)
+  console.log(getDay);
+  
+  
   
   res.render('home', {
     name,
@@ -80,23 +83,15 @@ app.post('/waiters/:username', async function (req, res) {
   });
 });
 
-
-
-
-
-
-app.get('/days', async function (req, res) {
+app.get('/days', async function (req, res){
+ const getDay ={ days : ['Monday','Tuesday', 'Wednesday', 'Thursday' , 'Friday' , 'Saturday' , 'Sunday']}
+  // let getDay = await waitersInst.getDay()
+  console.log("getDay", getDay);
   
-  
-   
-  console.log(getDay);
-  
-
-  res.render('home', {
-    getDay
-  });
+  res.render('admin',
+  getDay
+  );
 });
-
 
 
 let PORT = process.env.PORT || 3020;
