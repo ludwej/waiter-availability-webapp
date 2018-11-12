@@ -5,15 +5,18 @@ module.exports = function (pool) {
     if (waiter.rowCount === 0) {
       await pool.query('INSERT into waiters (waiter) values($1)', [name])
     }
+    if (waiter.rowCount === 1){
+      return 'waiter already selected their days'
+    }
+    
     let result = await pool.query('select * from waiters')
     return result.rows[0];
   }
 
-  async function getDay(days) {
+  async function getDay() {
     let getDay = await pool.query('SELECT day FROM weekdays');
     return getDay.rows
   }
-
 
   async function getShift(name, day) {
     let waiterId = await pool.query('SELECT id from waiters WHERE waiter=$1', [name])

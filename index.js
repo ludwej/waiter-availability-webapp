@@ -72,10 +72,7 @@ app.post('/waiters/:username', async function (req, res) {
   let days = req.body.day
   let inserWaiter = await waitersInst.enterWaiter(name)  
   let getDay = await waitersInst.getShift(name, days)
-  console.log(getDay);
-  
-  
-  
+ 
   res.render('home', {
     name,
     inserWaiter,
@@ -84,12 +81,12 @@ app.post('/waiters/:username', async function (req, res) {
 });
 
 app.get('/days', async function (req, res){
- const getDay ={ days : ['Monday','Tuesday', 'Wednesday', 'Thursday' , 'Friday' , 'Saturday' , 'Sunday']}
+ const getDay = await waitersInst.getDay();
+
   // let getDay = await waitersInst.getDay()
   console.log("getDay", getDay);
-  
-  res.render('admin',
-  getDay
+  res.render('admin', 
+ { getDay}
   );
 });
 
