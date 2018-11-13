@@ -5,13 +5,9 @@
 
 
      <table>
-            {{#each getDay}}
-        
+            {{#each admin}}
             <th> {{ this.day }} </th> 
-                {{#each waiter }}
-                    {{this.waiter}}
-                {{/each}}
-        
+                    {{!-- {{{this.waiter}}} --}}
         {{/each}}
 </table>
         
