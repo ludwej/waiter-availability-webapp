@@ -8,7 +8,7 @@ module.exports = function (pool) {
     if (waiter.rowCount === 1){
       return 'waiter already selected their days'
     }
-    
+      
     let result = await pool.query('select * from waiters')
     return result.rows[0];
   }
@@ -30,10 +30,18 @@ module.exports = function (pool) {
     }
 
     let joinTables = await pool.query('SELECT waiters.waiter, weekdays.day FROM waiters INNER JOIN shift ON waiters.id = shift.waiter_id INNER JOIN weekdays ON shift.day_id = weekdays.id')
+     
       
         return joinTables.rows
   }
-//   SELECT character.name, actor.name FROM character INNER JOIN
+
+  async function admin(name){
+  
+  let join = await pool.query('select * from weekdays left join shift on shift.day_id = weekdays.id left join waiters on waiters.id= waiter_id where waiter=$1;', [waiter.id])
+        // console.log(join);
+  return join.rows
+  }
+    //   SELECT character.name, actor.name FROM character INNER JOIN
 // character_actor ON character.id = character_actor.character_id INNER JOIN
 // actor ON character_actor.actor_id=actor.id;
 
@@ -41,6 +49,7 @@ module.exports = function (pool) {
     enterWaiter,
     getDay,
     getShift,
+    admin
   }
 
 }

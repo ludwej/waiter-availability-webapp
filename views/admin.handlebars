@@ -8,6 +8,9 @@
             {{#each getDay}}
         
             <th> {{ this.day }} </th> 
+                {{#each waiter }}
+                    {{this.waiter}}
+                {{/each}}
         
         {{/each}}
 </table>

@@ -56,8 +56,7 @@ app.use(flash())
   app.get('/waiters/:username', async function (req, res) {
     let waiter =  req.params.username
     let inserWaiter = await waitersInst.enterWaiter(waiter)
-    let days = await waitersInst.getDay()
-   
+    
    res.render('home',{
      inserWaiter,
      waiter
@@ -82,11 +81,14 @@ app.post('/waiters/:username', async function (req, res) {
 
 app.get('/days', async function (req, res){
  const getDay = await waitersInst.getDay();
+let admin = await waitersInst.admin();
+console.log(waiter);
 
   // let getDay = await waitersInst.getDay()
-  console.log("getDay", getDay);
   res.render('admin', 
- { getDay}
+ admin,
+ { getDay
+}
   );
 });
 
