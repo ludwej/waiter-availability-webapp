@@ -81,12 +81,13 @@ app.post('/waiters/:username', async function (req, res) {
 
 app.get('/days', async function (req, res){
  const getDay = await waitersInst.getDay();
-let admin = await waitersInst.admin();
-console.log(waiter);
+ let name = req.params.username;
+let admin = await waitersInst.admin(name);
 
-  // let getDay = await waitersInst.getDay()
   res.render('admin', 
  admin,
+ name,
+
  { getDay
 }
   );
