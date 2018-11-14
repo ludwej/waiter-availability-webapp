@@ -68,7 +68,7 @@ app.use(flash())
 
 app.post('/waiters/:username', async function (req, res) {
   let name = req.params.username;
-  let days = req.body.day
+  let days = req.body.day;
   let inserWaiter = await waitersInst.enterWaiter(name)  
   let getDay = await waitersInst.getShift(name, days)
  
@@ -81,14 +81,12 @@ app.post('/waiters/:username', async function (req, res) {
 
 app.get('/days', async function (req, res){
  const getDay = await waitersInst.getDay();
- let name = req.params.username;
-let admin = await waitersInst.admin(name);
+let admin = await waitersInst.admin();
 
   res.render('admin', 
- admin,
- name,
 
- { getDay
+ { admin,
+  getDay
 }
   );
 });
